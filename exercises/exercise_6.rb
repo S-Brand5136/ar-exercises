@@ -12,7 +12,7 @@ puts "----------"
 @store1 = Store.find_by("id = 1")
 @store2 = Store.find_by("id = 2")
 
-@store1.employees.create(first_name: "Bruce", last_name: "Willis", hourly_rate: 25)
+@store1.employees.create(first_name: "Bruce", last_name: "Willis", hourly_rate: 100)
 @store1.employees.create(first_name: "Matt", last_name: "Damon", hourly_rate: 40)
 @store1.employees.create(first_name: "Orlando", last_name: "Bloom", hourly_rate: 40)
 

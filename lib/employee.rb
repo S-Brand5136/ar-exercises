@@ -1,7 +1,10 @@
 class Employee < ActiveRecord::Base
   belongs_to :store
+  after_create :gen_password
   validate :employees_must_have_first_name,
   :employees_must_have_last_name, :employees_set_rate, :employees_must_have_store_id
+
+  # Validations
 
   def employees_must_have_first_name
     if (!first_name)
@@ -25,6 +28,14 @@ class Employee < ActiveRecord::Base
     if(!store)
       errors.add(:store, "employees must belong to a store")
     end
+  end
+
+  private
+
+  # Callback methods
+
+  def gen_password
+    self.password = rand(36**8).to_s(36)
   end
 
 end

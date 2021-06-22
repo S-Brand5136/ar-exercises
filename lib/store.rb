@@ -1,5 +1,6 @@
 class Store < ActiveRecord::Base
   has_many :employees
+  before_destroy :validate_employees_before_destroy
   validate :store_name_must_be_3_chars, :store_annual_revenue_is_integer_over_zero
 
   def store_name_must_be_3_chars
@@ -15,6 +16,14 @@ class Store < ActiveRecord::Base
 
     if(annual_revenue < 0) 
       errors.add(:annual_revenue, "must be greater than 0")
+    end
+  end
+
+  private
+
+  def validate_employees_before_destroy
+    unless (employees.length < 1)
+      false
     end
   end
 
